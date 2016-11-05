@@ -28,19 +28,26 @@ $messages = json_decode($data);
 $tweets = [];
 foreach ($messages->statuses as $message) {
     $entry = [
-        'screen_name' => $message->user->screen_name,
-        'name' => $message->user->name,
+        'id' => $message->id,
+        'author' => [
+            'handle' => $message->user->screen_name,
+            'name' => $message->user->name,
+            'avatar' => $message->user->profile_image_url_https,
+        ],
         'time' => new \DateTime($message->created_at, new \DateTimeZone('UTC')),
-        'message' => $message->text,
-        'mentions' => [],
+        'tweet' => $message->text,
+        'speaker' => [],
     ];
     if (isset ($message->entities->user_mentions)) {
         foreach ($message->entities->user_mentions as $mention) {
-            $entry['mentions'][] = [
-                'screen_name' => $mention->screen_name,
+            $entry['speaker'][] = [
+                'handle' => $mention->screen_name,
                 'name' => $mention->name,
             ];
         }
+    }
+    if (isset ($message->entities->media)) {
+        $entry['image'] = $message->entities->media[0]->media_url_https;
     }
     $tweets[] = $entry;
 }
