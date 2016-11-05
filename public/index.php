@@ -36,15 +36,17 @@ foreach ($messages->statuses as $message) {
         ],
         'time' => new \DateTime($message->created_at, new \DateTimeZone('UTC')),
         'tweet' => $message->text,
-        'speaker' => [],
     ];
     if (isset ($message->entities->user_mentions)) {
+        $entry['speaker'] = [];
+        $speakers = [];
         foreach ($message->entities->user_mentions as $mention) {
-            $entry['speaker'][] = [
+            $speakers[] = [
                 'handle' => $mention->screen_name,
                 'name' => $mention->name,
             ];
         }
+        $entry['speaker'] = $speakers[0];
     }
     if (isset ($message->entities->media)) {
         $entry['image'] = $message->entities->media[0]->media_url_https;
