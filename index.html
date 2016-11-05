@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TrueNorthPHP Twitter Wall</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="grid.css" />
+</head>
+<body>
+
+    <div id="TwitterWall" data-columns>
+    </div>
+
+    <script id="entry-template" type="text/x-handlebars-template">
+        <div class="grid-item">
+            {{#if image}}
+            <img src="{{ image }}" style="width: 100%; display: block;">
+            {{/if}}
+            <div class="x-image-hover">
+                <p>{{ tweet }}</p>
+                <div class="x-author">
+                    {{#if speaker}}
+                    <div class="pull-right"><img src="arrow_right.png" style="width:32px"></div>
+                    {{/if}}
+                    <a href="https://twitter.com/{{author.handle}}" target="_blank">
+                        {{#if author.avatar}}
+                        <img class="x-author-avatar pull-left" width="48" src="{{ author.avatar }}">
+                        {{/if}}
+                        <div class="x-author-name">{{ author.name }}</div>
+                        <div class="x-author-handle">@{{ author.handle }}</div>
+                    </a>
+                </div>
+                {{#if speaker}}
+                <div class="x-speaker">
+                    <a href="https://twitter.com/{{speaker.handle}}" target="_blank">
+                        {{#if speaker.avatar}}
+                        <img class="x-speaker-avatar pull-right" width="48" src="{{ speaker.avatar }}">
+                        {{/if}}
+                        <div class="x-speaker-name">{{ speaker.name }}</div>
+                        <div class="x-speaker-handle">@{{ speaker.handle }}</div>
+                    </a>
+                </div>
+                {{/if}}
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/salvattore/1.0.9/salvattore.min.js"></script>
+
+    <script>
+        var source   = $("#entry-template").html();
+        var template = Handlebars.compile(source);
+
+        var grid = document.querySelector('#TwitterWall');
+
+        $.get('tweets.json', function(data) {
+            data.forEach(function(row) {
+                var html = template(row);
+                var item = document.createElement('div');
+                salvattore.prependElements(grid, [item]);
+                item.outerHTML = html;
+            });
+        });
+    </script>
+
+</body>
+</html>

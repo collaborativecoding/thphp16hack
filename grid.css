@@ -1,0 +1,80 @@
+#TwitterWall[data-columns]::before {
+    content: '4 .column.size-1of4';
+}
+
+/* These are the classes that are going to be applied: */
+.column { float: left; }
+.size-1of1 { width: 100%; }
+.size-1of2 { width: 50%; }
+.size-1of3 { width: 33.333%; }
+.size-1of4 { width: 25%; }
+
+@media screen and (max-width: 480px){
+    #TwitterWall[data-columns]::before {
+        content: '1 .column.size-1of1';
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .showcase-grid[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width:819px) {
+    #TwitterWall[data-columns]::before {
+        content: '2 .column.size-1of2';
+    }
+}
+@media screen and (min-width: 820px) and (max-width: 1299px) {
+    #TwitterWall[data-columns]::before {
+        content: '3 .column.size-1of3';
+    }
+}
+@media screen and (min-width: 1300px){
+    #TwitterWall[data-columns]::before {
+        content: '4 .column.size-1of4';
+    }
+}
+
+.x-author {
+    width: 55%;
+    float: left;
+}
+
+.x-author-avatar {
+    padding-right: 4px;
+}
+
+.x-author-name {
+    font-weight: bold;
+}
+
+
+.x-speaker {
+    width: 45%;
+    float: right;
+}
+
+.x-speaker-avatar {
+    padding-left: 4px;
+}
+
+.x-speaker-name {
+    font-weight: bold;
+    text-align:right;
+}
+.x-speaker-handle {
+    text-align:right;
+}
+
+.grid-item {
+    border-bottom: 4px solid #ccc;
+    margin: 0 5px 15px 5px;
+}
+
+.x-image-hover {
+    padding: 14px;
+    background-color: #eaeaea;
+    font-size: 0.9em;
+}
