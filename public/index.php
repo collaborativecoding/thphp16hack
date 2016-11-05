@@ -38,7 +38,6 @@ foreach ($messages->statuses as $message) {
         'tweet' => $message->text,
     ];
     if (isset ($message->entities->user_mentions)) {
-        $entry['speaker'] = [];
         $speakers = [];
         foreach ($message->entities->user_mentions as $mention) {
             $speakers[] = [
@@ -46,7 +45,9 @@ foreach ($messages->statuses as $message) {
                 'name' => $mention->name,
             ];
         }
-        $entry['speaker'] = $speakers[0];
+        if ([] !== $speakers) {
+            $entry['speaker'] = $speakers[0];
+        }
     }
     if (isset ($message->entities->media)) {
         $entry['image'] = $message->entities->media[0]->media_url_https;
