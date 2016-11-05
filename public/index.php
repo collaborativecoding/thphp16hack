@@ -13,7 +13,9 @@ $settings = [
 
 $api_url = 'https://api.twitter.com/1.1/search/tweets.json';
 $getfield = http_build_query([
-    'q' => '#tnphp OR #tnphp16 OR #truenorthphp'
+    'q' => '#tnphp OR #tnphp16 OR #truenorthphp',
+    'count' => 100,
+//    'result_type' => 'popular',
 ]);
 $requestMethod = 'GET';
 $twitter = new TwitterAPIExchange($settings);
