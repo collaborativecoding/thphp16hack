@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', getenv('APP_ERROR'));
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $settings = [
