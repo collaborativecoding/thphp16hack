@@ -59,7 +59,7 @@
 
         var grid = document.querySelector('#TwitterWall');
 
-        $.get('/tweets.txt', function(data) {
+        $.get('/tweets.php', function(data) {
             data.forEach(function(row) {
                 var html = template(row);
                 var item = document.createElement('div');
