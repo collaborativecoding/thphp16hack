@@ -40,5 +40,5 @@ foreach ($messages->statuses as $message) {
     }
     $tweets[] = $entry;
 }
-
-var_dump($entries);
+header('Content-Type: application/json');
+echo json_encode($tweets);
